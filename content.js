@@ -8,13 +8,15 @@
   
   function replaceAllImages() {
     console.log("infunc");
-    //const ads = document.querySelectorAll('img');
-    const ads = document.querySelectorAll('iframe[id*=ad]');
-    //const adScripts = document.querySelectorAll('script[src*="ad"], script[src*="advertisement"]');
-    //const ads = document.querySelectorAll('div[class*="ad"], div[class*="promo"]');
-    
-    console.log(ads.length);
 
+    const iframes = document.querySelectorAll('iframe[id*=ad]');
+    const allElements = document.querySelectorAll('*');
+    const custom_types = Array.from(allElements).filter(el => {
+      return el.tagName.toLowerCase().includes('-ad-')
+    });
+    
+    const ads = [... iframes, ...custom_types];
+    console.log(custom_types.length);
     ads.forEach((e) => {
       
       const computedStyles = window.getComputedStyle(e);
