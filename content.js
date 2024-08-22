@@ -4,7 +4,7 @@
     }
   }); */
 
-  const NUM_PICS = 21;
+  const NUM_PICS = 18;
   
   function replaceAllImages() {
     console.log("infunc");
@@ -22,7 +22,7 @@
       
       let img_id = Math.floor(Math.random() * NUM_PICS);
       console.log("insert " + img_id);
-      img_id = 18;
+
       e.src = chrome.runtime.getURL(`images/pics/${img_id}.png`);
 
       // Apply CSS to make sure the new image fits within the original dimensions
