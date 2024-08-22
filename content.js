@@ -8,8 +8,8 @@
   
   function replaceAllImages() {
     console.log("infunc");
-    const ads = document.querySelectorAll('img');
-    //const ads = document.querySelectorAll('iframe[id*=ad]');
+    //const ads = document.querySelectorAll('img');
+    const ads = document.querySelectorAll('iframe[id*=ad]');
     //const adScripts = document.querySelectorAll('script[src*="ad"], script[src*="advertisement"]');
     //const ads = document.querySelectorAll('div[class*="ad"], div[class*="promo"]');
     
@@ -17,20 +17,30 @@
 
     ads.forEach((e) => {
       
-      const originalWidth = e.width;
-      const originalHeight = e.height;
+      const computedStyles = window.getComputedStyle(e);
       
-      let img_id = Math.floor(Math.random() * NUM_PICS);
-      console.log("insert " + img_id);
+      let img_id = Math.floor((Math.random() * NUM_PICS)+1);
+      
+      const link = document.createElement("a");
+      const img = document.createElement("img");
 
-      e.src = chrome.runtime.getURL(`images/pics/${img_id}.png`);
+      img.src = chrome.runtime.getURL(`images/pics/${img_id}.jpeg`);
+      link.href = img.src;
+      link.target = '_blank';
 
-      // Apply CSS to make sure the new image fits within the original dimensions
-      //e.style.width = `${originalWidth}px`;
-      //e.style.height = `${originalHeight}px`;
+      img.style.width = computedStyles.width;
+      img.style.height = computedStyles.height;
+      img.style.position = computedStyles.position;
+      img.style.top = computedStyles.top;
+      img.style.left = computedStyles.left;
+      img.style.margin = computedStyles.margin;
+      img.style.padding = computedStyles.padding;
+      img.style.display = computedStyles.display;
 
-      // Optionally, you might want to use object-fit to control how the image scales
-      e.style.objectFit = 'contain';
+      link.appendChild(img);
+
+      e.parentNode.insertBefore(link, e);
+      e.remove();
     });
   }
 
@@ -38,3 +48,6 @@
     //window.addEventListener('DOMContentLoaded', replaceAllImages);
   }, 6000);
   console.log("done");
+
+
+  
