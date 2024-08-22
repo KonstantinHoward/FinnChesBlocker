@@ -19,12 +19,13 @@
         "https://developer.chrome.com/docs/extensions/*",
         "https://developer.chrome.com/docs/webstore/*"
         ],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["images/*", "images/pics/*"],
+      "resources": ["images/*", "images/pics/*.png"],
       "matches": [
         "<all_urls>",
         "http://*/*",

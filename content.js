@@ -8,24 +8,33 @@
   
   function replaceAllImages() {
     console.log("infunc");
-    const images = document.querySelectorAll('img');
-    console.log(images.length);
-    images.forEach((img) => {
-      
-      const originalWidth = img.width;
-      const originalHeight = img.height;
+    const ads = document.querySelectorAll('img');
+    //const ads = document.querySelectorAll('iframe[id*=ad]');
+    //const adScripts = document.querySelectorAll('script[src*="ad"], script[src*="advertisement"]');
+    //const ads = document.querySelectorAll('div[class*="ad"], div[class*="promo"]');
+    
+    console.log(ads.length);
 
-      let img_id = Math.floor(Math.random() * NUM_PICS)
-      img.src = chrome.runtime.getURL(`images/pics/${img_id}.png`);
+    ads.forEach((e) => {
+      
+      const originalWidth = e.width;
+      const originalHeight = e.height;
+      
+      let img_id = Math.floor(Math.random() * NUM_PICS);
+      console.log("insert " + img_id);
+      img_id = 18;
+      e.src = chrome.runtime.getURL(`images/pics/${img_id}.png`);
 
       // Apply CSS to make sure the new image fits within the original dimensions
-      img.style.width = `${originalWidth}px`;
-      img.style.height = `${originalHeight}px`;
+      //e.style.width = `${originalWidth}px`;
+      //e.style.height = `${originalHeight}px`;
 
       // Optionally, you might want to use object-fit to control how the image scales
-      img.style.objectFit = 'contain';
+      e.style.objectFit = 'contain';
     });
   }
 
-  window.addEventListener('load', replaceAllImages)
-  console.log("done")
+  setTimeout(() => { replaceAllImages()
+    //window.addEventListener('DOMContentLoaded', replaceAllImages);
+  }, 6000);
+  console.log("done");
