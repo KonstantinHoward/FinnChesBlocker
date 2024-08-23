@@ -26,7 +26,7 @@
       const link = document.createElement("a");
       const img = document.createElement("img");
 
-      img.src = chrome.runtime.getURL(`https://konstantinhoward.github.io/pics/${img_id}.jpeg`);
+      img.src = `https://konstantinhoward.github.io/pics/${img_id}.jpeg`;
       link.href = img.src;
       link.target = '_blank';
 
