@@ -12,7 +12,7 @@
     const iframes = document.querySelectorAll('iframe[id*=ad]');
     const allElements = document.querySelectorAll('*');
     const custom_types = Array.from(allElements).filter(el => {
-      return el.tagName.toLowerCase().includes('-ad-')
+      return el.tagName.toLowerCase().includes('-ad-') || el.tagName.toLowerCase().includes('-ads-');
     });
     
     const ads = [... iframes, ...custom_types];
